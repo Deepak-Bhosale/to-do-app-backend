@@ -2,34 +2,30 @@ import mongoose from "mongoose";
 import seedData from "./seedData";
 
 export class Database {
-  public static open = async (mongoUrl : string) => {
+  public static open = async (mongoUrl: string) => {
     try {
-      return new Promise<void>((resolve, reject) => {
-        const options = {
-          autoIndex: false,
-          minPoolSize: 5,
-        };
-        mongoose.connect(mongoUrl, options);
-        mongoose.connection.on('error', () => {
-          console.log('Database is not connected :');
-          reject();
-        });
-        mongoose.connection.on('connected', async () => {
-          console.log('\nDatabase connect successfully');
-          await seedData();
-          resolve();
-        });
-      });
+      const options = {
+        autoIndex: false,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      };
+
+      await mongoose.connect(mongoUrl, options as any);
+      console.log("\n Database connected successfully");
+
+      await seedData();
     } catch (error) {
-      console.log('CATCH BLOCK : database open =>', error);
+      console.error(" Failed to connect to MongoDB:", error);
+      process.exit(1);
     }
-  }
+  };
 
   public static disconnect = async () => {
     try {
       await mongoose.disconnect();
+      console.log(" Database disconnected");
     } catch (error) {
-      console.log('CATCH BLOCK : database disconnect =>', error);
+      console.error(" Error disconnecting database:", error);
     }
   };
 }
