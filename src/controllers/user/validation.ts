@@ -1,4 +1,4 @@
-import { errorMessages } from '../../libs/constant';
+import { errorMessages } from "../../libs/constant";
 
 export default Object.freeze({
   get: {},
@@ -7,81 +7,101 @@ export default Object.freeze({
   create: {
     firstName: {
       errorMessage: errorMessages.BAD_FIRST_NAME_REQUEST,
-      in: ['body'],
+      in: ["body"],
       isLength: {
-        errorMassage: errorMessages.BAD_FIRST_NAME_REQUEST,
+        errorMessage: errorMessages.BAD_FIRST_NAME_REQUEST,
         options: { min: 3 },
       },
     },
     lastName: {
       errorMessage: errorMessages.BAD_LAST_NAME_REQUEST,
-      in: ['body'],
+      in: ["body"],
       isLength: {
-        errorMassage: errorMessages.BAD_LAST_NAME_REQUEST,
+        errorMessage: errorMessages.BAD_LAST_NAME_REQUEST,
         options: { min: 3 },
       },
     },
     email: {
       errorMessage: errorMessages.BAD_EMAIL_REQUEST,
-      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      in: ['body'],
+      in: ["body"],
+      isEmail: {
+        errorMessage: errorMessages.BAD_EMAIL_REQUEST,
+      },
+      matches: {
+        options: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        errorMessage: errorMessages.BAD_EMAIL_REQUEST,
+      },
       isLength: {
-        errorMassage: errorMessages.BAD_EMAIL_REQUEST,
+        errorMessage: errorMessages.BAD_EMAIL_REQUEST,
         options: { min: 6 },
       },
     },
     password: {
       errorMessage: errorMessages.BAD_PASSWORD_REQUEST,
-      in: ['body'],
+      in: ["body"],
       isLength: {
-        errorMassage: errorMessages.BAD_PASSWORD_LENGTH_REQUEST,
+        errorMessage: errorMessages.BAD_PASSWORD_LENGTH_REQUEST,
         options: { min: 6 },
       },
     },
     role: {
       errorMessage: errorMessages.BAD_ROLE_REQUEST,
-      in: ['body'],
+      in: ["body"],
       isLength: {
-        errorMassage: errorMessages.BAD_ROLE_REQUEST,
+        errorMessage: errorMessages.BAD_ROLE_REQUEST,
         options: { min: 3 },
       },
     },
   },
   addBulkUsers: {
     errorMessage: errorMessages.BAD_INSERT_MANY,
-      in: ['body'],
+    in: ["body"],
   },
   update: {
     originalId: {
-      string: true,
-      exist: true,
       errorMessage: errorMessages.BAD_ORIGINALID_REQUEST,
-      in: ['params'],
+      in: ["params"],
+      isString: {
+        errorMessage: errorMessages.BAD_ORIGINALID_REQUEST,
+      },
+      notEmpty: {
+        errorMessage: errorMessages.BAD_ORIGINALID_REQUEST,
+      },
     },
   },
   delete: {
     originalId: {
-      string: true,
-      exist: true,
       errorMessage: errorMessages.BAD_ORIGINALID_REQUEST,
-      in: ['params'],
+      in: ["params"],
+      isString: {
+        errorMessage: errorMessages.BAD_ORIGINALID_REQUEST,
+      },
+      notEmpty: {
+        errorMessage: errorMessages.BAD_ORIGINALID_REQUEST,
+      },
     },
   },
   login: {
     email: {
       errorMessage: errorMessages.BAD_EMAIL_REQUEST,
-      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      in: ['body'],
+      in: ["body"],
+      isEmail: {
+        errorMessage: errorMessages.BAD_EMAIL_REQUEST,
+      },
+      matches: {
+        options: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        errorMessage: errorMessages.BAD_EMAIL_REQUEST,
+      },
       isLength: {
-        errorMassage: errorMessages.BAD_EMAIL_REQUEST,
+        errorMessage: errorMessages.BAD_EMAIL_REQUEST,
         options: { min: 6 },
       },
     },
     password: {
-      errorMessage: errorMessages.BAD_EMAIL_REQUEST,
-      in: ['body'],
+      errorMessage: errorMessages.BAD_PASSWORD_REQUEST,
+      in: ["body"],
       isLength: {
-        errorMassage: errorMessages.BAD_EMAIL_REQUEST,
+        errorMessage: errorMessages.BAD_PASSWORD_REQUEST,
         options: { min: 6 },
       },
     },

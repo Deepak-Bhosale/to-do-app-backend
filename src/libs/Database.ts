@@ -6,8 +6,8 @@ export class Database {
     try {
       const options = {
         autoIndex: false,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
       };
 
       await mongoose.connect(mongoUrl, options as any);
