@@ -4,28 +4,32 @@ import seedData from "./seedData";
 export class Database {
   public static open = async (mongoUrl: string) => {
     try {
-      const options = {
-        autoIndex: false,
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-      };
-
-      await mongoose.connect(mongoUrl, options as any);
-      console.log("\n Database connected successfully");
-
-      await seedData();
+      return new Promise<void>((resolve, reject) => {
+        const options = {
+          autoIndex: false,
+          minPoolSize: 5,
+        };
+        mongoose.connect(mongoUrl, options);
+        mongoose.connection.on("error", () => {
+          console.log("Database is not connected :");
+          reject();
+        });
+        mongoose.connection.on("connected", async () => {
+          console.log("\nDatabase connect successfully");
+          await seedData();
+          resolve();
+        });
+      });
     } catch (error) {
-      console.error(" Failed to connect to MongoDB:", error);
-      process.exit(1);
+      console.log("CATCH BLOCK : database open =>", error);
     }
   };
 
   public static disconnect = async () => {
     try {
       await mongoose.disconnect();
-      console.log(" Database disconnected");
     } catch (error) {
-      console.error(" Error disconnecting database:", error);
+      console.log("CATCH BLOCK : database disconnect =>", error);
     }
   };
 }
