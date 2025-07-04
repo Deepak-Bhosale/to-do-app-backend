@@ -5,4 +5,4 @@ import { ICardModel } from "./ICardModel";
 export const cardSchema = new CardSchema({ collection: "cards", versionKey: false });
 export const cardModel: mongoose.Model<ICardModel> = mongoose.model<ICardModel>("cards", cardSchema);
 
-// cardModel.collection.createIndex({ title: 1 });
+cardModel.collection.createIndex({ title: 1 });
