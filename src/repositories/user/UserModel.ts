@@ -9,4 +9,4 @@ export const userSchema = new UserSchema({
 
 export const userModel: mongoose.Model<IUserModel> = mongoose.model<IUserModel>("users", userSchema);
 
-// userModel.collection.createIndex({ email: 1 });
+userModel.collection.createIndex({ email: 1 });
